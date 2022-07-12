@@ -53,7 +53,21 @@ while running:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 playerY_change = 0
 
+    #set the boundaries of y coordinate
     playerY += playerY_change
+
+    if playerY <= 0:
+        playerY = 0
+    elif playerY >= 535:
+        playerY = 535
+
+    #set the boundaries of x coordinate
     playerX += playerX_change
+
+    if playerX <= 0:
+        playerX = 0
+    elif playerX >= 935:
+        playerX = 935
+
     player(playerX,playerY)
     pygame.display.update()
