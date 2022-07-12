@@ -1,5 +1,3 @@
-from cProfile import run
-from numpy import diff
 import pygame
 
 #intilizattion of pygame
