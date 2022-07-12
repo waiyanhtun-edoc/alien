@@ -1,4 +1,5 @@
 import pygame
+import random
 
 #intilizattion of pygame
 pygame.init()
@@ -18,11 +19,22 @@ playerY  = 500
 playerX_change = 0
 playerY_change = 0
 
+#enemy
+enemyImage = pygame.image.load('enemy.png')
+enemyX  = random.randint(0, 800)
+enemyY  = random.randint(50, 150)
+enemyX_change = 0
+
+
 #draw ship on screen
 def player(x,y):
     """Something"""
     screen.blit(playerImage,(x,y))
 
+#draw enemy on screen
+def enemy(x,y):
+    """Something"""
+    screen.blit(enemyImage,(x,y))
 
 #Game Loop
 running = True
@@ -69,5 +81,6 @@ while running:
     elif playerX >= 935:
         playerX = 935
 
+    enemy(enemyX,enemyY)
     player(playerX,playerY)
     pygame.display.update()
