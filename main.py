@@ -15,11 +15,12 @@ pygame.display.set_icon(icon)
 playerImage = pygame.image.load('ship.png')
 playerX  = 470
 playerY  = 500
+playerImg_Change = 0
 
 #draw ship on screen
-def player():
+def player(x,y):
     """Something"""
-    screen.blit(playerImage,(playerX,playerY))
+    screen.blit(playerImage,(x,y))
 
 
 #Game Loop
@@ -28,6 +29,7 @@ while running:
 
     #Background color
     screen.fill((80,50,100))
+    playerY -= 0.1
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -35,5 +37,5 @@ while running:
 
         
 
-    player()
+    player(playerX,playerY)
     pygame.display.update()
