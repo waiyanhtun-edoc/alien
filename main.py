@@ -23,7 +23,8 @@ playerY_change = 0
 enemyImage = pygame.image.load('enemy.png')
 enemyX  = random.randint(0, 800)
 enemyY  = random.randint(50, 150)
-enemyX_change = 0
+enemyX_change = 0.3
+enemyY_change = 10
 
 
 #draw ship on screen
@@ -78,8 +79,20 @@ while running:
 
     if playerX <= 0:
         playerX = 0
-    elif playerX >= 935:
+    elif playerX >= 800:
         playerX = 935
+
+
+    #set the boundaries of enemy 
+    enemyX += enemyX_change
+
+    if enemyX <= 0:
+        enemyX_change = 0.3
+        enemyY += enemyY_change 
+    elif enemyX >= 935:
+        enemyX_change = -0.3
+        enemyY += enemyY_change
+
 
     enemy(enemyX,enemyY)
     player(playerX,playerY)
