@@ -7,6 +7,9 @@ pygame.init()
 #screen 
 screen = pygame.display.set_mode((1000,600))
 
+#background image
+background = pygame.image.load('backgroun.png')
+
 #Title and icon
 pygame.display.set_caption("Alien Invasion")
 icon = pygame.image.load('icon.png')
@@ -23,7 +26,7 @@ playerY_change = 0
 enemyImage = pygame.image.load('enemy.png')
 enemyX  = random.randint(0, 800)
 enemyY  = random.randint(50, 150)
-enemyX_change = 0.3
+enemyX_change = 0.5
 enemyY_change = 10
 
 
@@ -44,6 +47,8 @@ while running:
     #Background color
     screen.fill((80,50,100))
     
+    #Background image
+    screen.blit(background,(0,0))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -52,13 +57,13 @@ while running:
         #if keystroke is pressed check whether its right or left
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                playerX_change = -0.4
+                playerX_change = -1
             if event.key == pygame.K_RIGHT:
-                playerX_change = 0.4
+                playerX_change = 1
             if event.key == pygame.K_UP:
-                playerY_change = -0.4
+                playerY_change = -1
             if event.key == pygame.K_DOWN:
-                playerY_change =  0.4
+                playerY_change =  1
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -79,7 +84,7 @@ while running:
 
     if playerX <= 0:
         playerX = 0
-    elif playerX >= 800:
+    elif playerX >= 935:
         playerX = 935
 
 
@@ -87,10 +92,10 @@ while running:
     enemyX += enemyX_change
 
     if enemyX <= 0:
-        enemyX_change = 0.3
+        enemyX_change = 0.5
         enemyY += enemyY_change 
     elif enemyX >= 935:
-        enemyX_change = -0.3
+        enemyX_change = -0.5  
         enemyY += enemyY_change
 
 
