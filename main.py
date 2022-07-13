@@ -52,7 +52,7 @@ def fire_bullet(x,y):
     """Something"""
     global bullet_state
     bullet_state = "fire"
-    screen.blit(bulletImage,(x + 15, y + 10))
+    screen.blit(bulletImage,(x + 15, y ))
 
 #Game Loop
 running = True
@@ -79,7 +79,9 @@ while running:
             if event.key == pygame.K_DOWN:
                 playerY_change =  1
             if event.key == pygame.K_SPACE:
-                fire_bullet(playerX,bulletY)
+                if bullet_state is "ready":
+                    bulletX = playerX
+                    fire_bullet(bulletX,bulletY)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -103,11 +105,14 @@ while running:
     elif playerX >= 935:
         playerX = 935
 
-    #bullet movement
-    bulletX += playerX_change
+    #bullet boundaries
+    if bulletY <= 0:
+        bulletY = 480
+        bullet_state = "ready"
 
+    #bullet movement
     if bullet_state is "fire":
-        fire_bullet(playerX,bulletY)
+        fire_bullet(bulletX,bulletY)
         bulletY -= bulletY_change
 
 
