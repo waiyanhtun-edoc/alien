@@ -14,9 +14,15 @@ font = pygame.font.Font('RobotoSlab-Medium.ttf',32)
 textX = 10
 textY = 10
  
+ 
 
 #screen 
 screen = pygame.display.set_mode((1000,600))
+
+#game over text 
+over_font = pygame.font.Font('RobotoSlab-Medium.ttf',64)
+overX = 10
+overY = 10
 
 #background image
 background = pygame.image.load('backgroun.png')
@@ -63,6 +69,9 @@ bulletY_change = 10
 bullet_state = "ready"
 
 #show text of score
+def game_over_text(x,y):
+    over_text = over_font.render("GAME OVER" ,True,(250,200,255))
+    screen.blit(over_text,(x,y))
 
 def show_score(x,y):
     score = font.render("Score :) " + str(score_value),True,(250,200,255))
@@ -166,6 +175,13 @@ while running:
     #set the boundaries of enemy 
     for i in range(number_enemy):
 
+        #GAME Over
+        if enemyY[i] >= 2000:
+            for j in range(number_enemy):
+                enemyY[j] = 20000
+            game_over_text(overX,overY)
+            break
+
         enemyX[i] += enemyX_change[i]
 
         if enemyX[i] <= 0:
@@ -191,6 +207,6 @@ while running:
         enemy(enemyX[i],enemyY[i],i)
 
 
-    show_score(textX,textY)
+    show_score(textX,textY) 
     player(playerX,playerY)
     pygame.display.update()
