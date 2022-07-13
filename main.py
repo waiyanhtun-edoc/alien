@@ -29,6 +29,13 @@ enemyY  = random.randint(50, 150)
 enemyX_change = 0.5
 enemyY_change = 10
 
+#bullet
+bulletImage = pygame.image.load('bullet.png')
+bulletX  = 0
+bulletY  = 480
+bulletX_change = 0
+bulletY_change = 1
+bullet_state = "ready"
 
 #draw ship on screen
 def player(x,y):
@@ -39,6 +46,13 @@ def player(x,y):
 def enemy(x,y):
     """Something"""
     screen.blit(enemyImage,(x,y))
+
+#bullet 
+def fire_bullet(x,y):
+    """Something"""
+    global bullet_state
+    bullet_state = "fire"
+    screen.blit(bulletImage,(x + 15, y + 10))
 
 #Game Loop
 running = True
@@ -64,6 +78,8 @@ while running:
                 playerY_change = -1
             if event.key == pygame.K_DOWN:
                 playerY_change =  1
+            if event.key == pygame.K_SPACE:
+                fire_bullet(playerX,bulletY)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -87,6 +103,13 @@ while running:
     elif playerX >= 935:
         playerX = 935
 
+    #bullet movement
+    bulletX += playerX_change
+
+    if bullet_state is "fire":
+        fire_bullet(playerX,bulletY)
+        bulletY -= bulletY_change
+
 
     #set the boundaries of enemy 
     enemyX += enemyX_change
@@ -98,7 +121,6 @@ while running:
         enemyX_change = -0.5  
         enemyY += enemyY_change
 
-
-    enemy(enemyX,enemyY)
     player(playerX,playerY)
+    enemy(enemyX,enemyY)
     pygame.display.update()
