@@ -100,10 +100,10 @@ while running:
     #set the boundaries of x coordinate
     playerX += playerX_change
 
-    if playerX <= 0:
-        playerX = 0
-    elif playerX >= 935:
-        playerX = 935
+    if playerX <= 10:
+        playerX = 10
+    elif playerX >= 930:
+        playerX = 930
 
     #bullet boundaries
     if bulletY <= 0:
